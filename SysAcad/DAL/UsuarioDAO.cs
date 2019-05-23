@@ -35,7 +35,7 @@ namespace SysAcad.DAL
         public static bool CadastrarUsuario(Usuario u)
         {
             Usuario usuario = BuscarUsuarioPorCPF(u);
-            if(usuario == null)
+            if (usuario == null)
             {
                 ctx.Usuarios.Add(u);
                 ctx.SaveChanges();
@@ -62,6 +62,15 @@ namespace SysAcad.DAL
             Usuario u = ctx.Usuarios.Find(id);
             ctx.Usuarios.Remove(u);
             ctx.SaveChanges();
+        }
+
+        public static bool Alterar(Usuario us)
+        {
+            Usuario usu = ctx.Usuarios.Find(us.UsuarioId);
+            DbEntityEntry<Usuario> ee = ctx.Entry(us);
+            ee.CurrentValues.SetValues(us);
+            ctx.SaveChanges();
+            return true;
         }
     }
 }

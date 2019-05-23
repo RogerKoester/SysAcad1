@@ -6,78 +6,71 @@
     {
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
-
+    SysAcad.Models.Usuario usuario = ViewBag.Usuario;
 }
 
 <h2>Alterar</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Alterar", "Usuario",
+                                                    FormMethod.Post, new { @class = "form-horizontal" }))
 {
-   
-    
+
+
     <div class="form-horizontal">
         <h4>Usuario</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UsuarioId)
+        @Html.Hidden("hdnId", usuario.UsuarioId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Nome", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtNome", usuario.Nome, new { @class = "form-control", @placeholder = "Digite o nome do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("CPF", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtCpf", usuario.CPF, new { @class = "form-control", @placeholder = "Digite o CPF do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Idade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Idade, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Idade, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Idade", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtIdade", usuario.Idade, new { @class = "form-control", @placeholder = "Digite a idade do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Gênero", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtGenero", usuario.Genero, new { @class = "form-control", @placeholder = "Digite o gênero do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Peso, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Peso, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Peso", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtPeso", usuario.Peso, new { @class = "form-control", @placeholder = "Digite o peso do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Altura, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Altura, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Altura", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtAltura", usuario.Altura, new { @class = "form-control", @placeholder = "Digite a altura do usuário" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Senha", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtSenha", usuario.Senha, new { @class = "form-control", @placeholder = "Digite a senha do usuário" })
             </div>
         </div>
 
-        
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
