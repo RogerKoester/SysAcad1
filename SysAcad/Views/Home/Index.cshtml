@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Treinos";
+    bool isAdmin = ViewBag.IsAdmin;
+    if (ViewBag.IsAdmin)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>@isAdmin.ToString()</h1>
+</body>
+</html>

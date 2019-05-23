@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysAcad - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top text-center">
+        <div class="container text-center">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Sys Acad", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <div class="dropdown text-center">
+                        <label class="btn btn-primary dropdown-toggle text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administração
+                        </label>
+                        <div class="dropdown-menu dropdown-menu-right text-center">
+                            <li>@Html.ActionLink("Usuário", "Index", "Usuario")</li>
+                            <li>@Html.ActionLink("Exercício", "Index", "Exercicio")</li>
+                            <li>@Html.ActionLink("Periodo", "Administracao", "Home")</li>
+                            <li>@Html.ActionLink("Treino", "Index", "Treino" )</li>
+                        </div>
+                    </div>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                    <li>@ViewBag.Usuario.Nome</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Sys Acad</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

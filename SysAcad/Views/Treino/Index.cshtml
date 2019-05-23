@@ -1,0 +1,44 @@
+﻿@model SysAcad.Models.Treino
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+
+    <h2>Cadastrar treino</h2>
+
+    <div id="Nome" class="form-group">
+        @Html.Label("Nome", new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBox("txtNome","" , new { @class = "form-control", @placeholder = "Digite o nome do treino" })
+        </div>
+    </div>
+    <div id="Descricao" class="form-group">
+        @Html.Label("Quantidade de treino", new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBox("txtQuantidade","", new { @class = "form-control", @placeholder = "Digite a quantidade" })
+        </div>
+        </div>
+    <div id="Usuario" class="form-group">
+        @Html.Label("Nome do usuário", new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBox("txtUsuario", "", new { @class = "form-control", @placeholder = "Digite o nome do usuário" })
+        </div>
+
+
+    </div>
+
+        <div id="Usuario" class="form-group">            
+            @Html.LabelFor(model => model.Usuarios, new { @class = "control-label col-sm-2" })
+            @*@Html.Label("Categoria", new { @class = "control-label col-sm-2" })*@
+            <div class="col-sm-10">
+                @Html.DropDownList("Usuários", null,
+                    " -- SELECIONE -- ",
+                    new { @class = "form-control" })
+            </div>
+        </div>
+      
+</div>
+
+

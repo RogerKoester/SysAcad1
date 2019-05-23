@@ -1,0 +1,95 @@
+﻿@model SysAcad.Models.Exercicio
+
+@{
+    ViewBag.Title = "Cadastrar";
+    List<SysAcad.Models.Exercicio>ListaExercicios = ViewBag.ListaExercicios;
+    if (ViewBag.IsAdmin){
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2>Cadastro de exercício</h2>
+
+
+@using (Html.BeginForm("Cadastrar", "Exercicio",
+                                            FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Exercicio</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="Imagem" class="form-group">
+            @Html.Label("Imagem", new { @class = "control-label col-sm-10" })
+            <div class="col-sm-10">
+                <input type="file" name="fupImagem" id="fupImagem"
+                       class="form-control-file" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    <hr />
+}
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Link</th>
+            <th>Dono</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        @foreach (SysAcad.Models.Exercicio exercicio in ListaExercicios)
+        {
+            <tr>
+                <td>@exercicio.Nome</td>
+                <td>
+                    <a href="@exercicio.Link">
+                        <div style="height:100%;width:100%">
+                            @exercicio.Link
+                        </div>
+                    </a>
+                </td>
+                <td>@exercicio.UsuarioDono.Nome</td>
+                <td>@Html.ActionLink("Remover", "Remover", "Exercicio",
+                   new { id = exercicio.ExercicioId},
+                   new { @class = "btn btn-danger" })</td>
+                <td>
+                    @Html.ActionLink("Alterar", "Alterar", "Exercicio",
+                   new { nome = exercicio.Nome },
+                   new { @class = "btn btn-warning" })
+            </td>
+
+            </tr>
+        }
+    </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
