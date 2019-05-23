@@ -1,4 +1,5 @@
-﻿using SysAcad.Models;
+﻿using SysAcad.DAL;
+using SysAcad.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace SysAcad.Controllers
         // GET: Treino
         public ActionResult Index()
         {
+            ViewBag.Usuarios = new SelectList(UsuarioDAO.RetornarUsuarios(), "UsuarioId", "Nome");
+     
             if (Session["USUARIO"] != null)
             {
                 Usuario user = (Usuario)Session["USUARIO"];
@@ -22,6 +25,6 @@ namespace SysAcad.Controllers
             return View();
         }
 
-        public ActionResult 
+  
     }
 }

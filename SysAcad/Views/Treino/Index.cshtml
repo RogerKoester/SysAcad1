@@ -20,24 +20,25 @@
             @Html.TextBox("txtQuantidade","", new { @class = "form-control", @placeholder = "Digite a quantidade" })
         </div>
         </div>
-    <div id="Usuario" class="form-group">
-        @Html.Label("Nome do usuário", new { @class = "control-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBox("txtUsuario", "", new { @class = "form-control", @placeholder = "Digite o nome do usuário" })
-        </div>
+    
 
-
-    </div>
 
         <div id="Usuario" class="form-group">            
-            @Html.LabelFor(model => model.Usuarios, new { @class = "control-label col-sm-2" })
+            @Html.LabelFor(model => model.Usuario, new { @class = "control-label col-sm-2" })
            
             <div class="col-sm-10">
-                @Html.DropDownList("Usuários", null,
+                @Html.DropDownList("Usuarios", null,
                     " -- SELECIONE -- ",
                     new { @class = "form-control" })
             </div>
+
         </div>
+    <div id="DataExpiracao" class="form-group">
+        @Html.Label("Data de expiração", new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBox("txtDataDeExpiracao", "", new { @class = "form-control", @placeholder = "Digite a data de expiração" })
+        </div>
+    </div>
       
 </div>
 
