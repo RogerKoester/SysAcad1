@@ -50,19 +50,22 @@
                    new { nome = usuario.Nome },
                    new { @class = "btn btn-warning" })
         </td>
-
-            @if (!usuario.IsAdmin)
+            @if (ViewBag.IsAdmin)
             {
-                <td>
-                    @Html.ActionLink("Tornar administrador", "TornarAdmin", "Usuario",
+                if (!usuario.IsAdmin)
+                {
+                    <td>
+                        @Html.ActionLink("Tornar administrador", "TornarAdmin", "Usuario",
                    new { id = usuario.UsuarioId },
                    new { @class = "btn btn-danger" })
-                </td>
+                    </td>
+                }
+                else
+                {
+                    <td>Administrador</td>
+                }
             }
-            else
-            {
-                <td>Administrador</td>
-            }
+            
 
     </tr>
     }
