@@ -17,6 +17,6 @@ namespace SysAcad.Models
         public List<ItemTreino> ItensTreino { get; set; }
         public List<Finalizacao> TreinosRealizados { get; set; }
         public DateTime DataExpiracao { get; set; }
-        public object Nome { get; internal set; }
+        public string Nome { get; internal set; }
     }
 }

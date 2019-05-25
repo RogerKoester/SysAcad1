@@ -59,7 +59,7 @@ namespace SysAcad.Controllers
             if (UsuarioDAO.CadastrarUsuario(u))
             {
                 Session["USUARIO"] = u;
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Index", "Home");
             }
             else
             {

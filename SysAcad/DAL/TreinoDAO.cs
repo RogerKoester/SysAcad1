@@ -14,5 +14,10 @@ namespace SysAcad.DAL
         {
             return ctx.Treinos.Find(e.TreinoId);
         }
+
+        public static List<Treino> RetornarTreinoPorUsuario(Usuario u)
+        {
+            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
+        }
     }
 }

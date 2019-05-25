@@ -20,7 +20,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+                    @Html.ActionLink("Treino atual", "TreinoAtual", "Treino", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Treinos", "ListaTreino", "Treino", new { area = "" }, new { @class = "navbar-brand" })
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Logout", "Login")</li>

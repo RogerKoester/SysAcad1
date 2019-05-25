@@ -74,6 +74,34 @@ namespace SysAcad.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Cadastrar(string Nome, string CPF, int Idade, string Genero, int Peso, double Altura, string Senha)
+        {
+            Usuario u = new Usuario
+            {
+                Nome = Nome,
+                CPF = CPF,
+                Idade = Idade,
+                Genero = Genero,
+                Peso = Peso,
+                Altura = Altura,
+                Senha = Senha,
+                IsAdmin = false
+            };
+
+            Periodo periodoPreferido = Periodo.calcularHorarioPreferido(u);
+            if (UsuarioDAO.CadastrarUsuario(u))
+            {
+                Session["USUARIO"] = u;
+                return RedirectToAction("Index", "Usuario");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Login");
+            }
+
+        }
+
         public ActionResult Remover(int? id)
         {
             if (id == null)
