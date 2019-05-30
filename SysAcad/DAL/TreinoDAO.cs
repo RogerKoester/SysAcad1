@@ -19,5 +19,31 @@ namespace SysAcad.DAL
         {
             return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
         }
+
+        public static List<Treino> RetornarTreinos()
+        {
+            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").ToList();
+        }
+
+        public static Treino BuscarTreinoPorNome(Treino t)
+        {
+            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").FirstOrDefault(x => x.Nome.Equals(t.Nome));
+        }
+
+        public static bool CadastrarTreino(Treino treino)
+        {
+            Treino t = BuscarTreinoPorNome(treino);
+
+            if (t == null)
+            {
+                ctx.Treinos.Add(treino);
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

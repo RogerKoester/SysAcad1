@@ -22,7 +22,7 @@ namespace SysAcad.DAL
                 (x => x.Nome.Equals(u.Nome));
         }
 
-        public static Usuario BuscarUsuario(int id)
+        public static Usuario BuscarUsuario(int? id)
         {
             return ctx.Usuarios.Find(id);
         }

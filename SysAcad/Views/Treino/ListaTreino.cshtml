@@ -3,6 +3,11 @@
 
 @{
     int i = 0;
+    if (ViewBag.IsAdmin)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    SysAcad.Models.Usuario usuario = ViewBag.Usuario;
 }
 <!DOCTYPE html>
 

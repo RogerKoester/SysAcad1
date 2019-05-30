@@ -1,7 +1,12 @@
 ﻿@model SysAcad.Models.Usuario
 
 @{
-    Layout = null;
+    ViewBag.Title = "Cadastro de usuário";
+    if (ViewBag.IsAdmin)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    SysAcad.Models.Usuario usuario = ViewBag.Usuario;
 }
 
 <!DOCTYPE html>

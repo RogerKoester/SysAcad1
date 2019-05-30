@@ -1,9 +1,19 @@
 ﻿@model SysAcad.Models.Treino
+@using SysAcad.Models
+
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Treino";
+    if (ViewBag.IsAdmin)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    List<Treino> treinos = ViewBag.Treinos;
+    int i = 0;
 }
 
+@using (Html.BeginForm("Cadastrar", "Treino",FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+
+{
 <div class="form-horizontal">
 
     <h2>Cadastrar treino</h2>
@@ -11,13 +21,13 @@
     <div id="Nome" class="form-group">
         @Html.Label("Nome", new { @class = "control-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.TextBox("txtNome","" , new { @class = "form-control", @placeholder = "Digite o nome do treino" })
+            @Html.TextBox("txtNome", "", new { @class = "form-control", @placeholder = "Digite o nome do treino" })
         </div>
     </div>
     <div id="Descricao" class="form-group">
         @Html.Label("Quantidade de treino", new { @class = "control-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.TextBox("txtQuantidade","", new { @class = "form-control", @placeholder = "Digite a quantidade" })
+            @Html.TextBox("txtQuantidade", "", new { @class = "form-control", @placeholder = "Digite a quantidade" })
         </div>
         </div>
     
@@ -28,8 +38,8 @@
            
             <div class="col-sm-10">
                 @Html.DropDownList("Usuarios", null,
-                    " -- SELECIONE -- ",
-                    new { @class = "form-control" })
+             " -- SELECIONE -- ",
+             new { @class = "form-control" })
             </div>
 
         </div>
@@ -39,7 +49,107 @@
             @Html.TextBox("txtDataDeExpiracao", "", new { @class = "form-control", @placeholder = "Digite a data de expiração" })
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+        </div>
+    </div>
       
 </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantidadeTreinos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataExpiracao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TreinosRealizados)
+        </th>
+
+    </tr>
+    <tr></tr>
+    @foreach (var item in treinos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantidadeTreinos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataExpiracao)
+            </td>
+            <td>
+                @if(item.TreinosRealizados == null)
+                {
+                    @("0")
+                }
+                else
+                {
+                    @(item.TreinosRealizados.Count.ToString())
+                }
+
+            </td>
+        </tr>
+            <tr>
+                <td>
+                    <div class="panel-group" id="accordion_@i">
+                        <div class="panel panel-default" id="panel_@i">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
+                                        Exercicios
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne_@i" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    @if (item.ItensTreino != null)
+                                    {
+                                        foreach (ItemTreino itenTreino in item.ItensTreino)
+                                        {
+                                            <h3 style="margin-top: auto">@itenTreino.Exercicio.Nome</h3>
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                    @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                                </li>
+                                                <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                    @("Séries : " + itenTreino.Series.ToString())
+                                                </li>
+                                            </ul>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        i++;
+    }
+
+</table>
+
+
+
+
+
 
 
