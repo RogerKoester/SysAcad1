@@ -12,8 +12,10 @@ namespace SysAcad.Models
     {
         [Key]
         public int ExercicioId { get; set; }
+        public List<Imagem> Imagens { get; set; }
         public string Nome { get; set; }
         public string Link { get; set; }
         public Usuario UsuarioDono { get; set; }
+        
     }
 }

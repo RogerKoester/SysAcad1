@@ -69,21 +69,26 @@ namespace SysAcad.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(string Nome, string Link, HttpPostedFile fupImagem)
+        public ActionResult Cadastrar(string Nome, string Link, HttpPostedFile img)
         {
-
-            if (fupImagem != null)
-            {
-                string caminho = System.IO.Path.Combine
-                    (Server.MapPath("~/Image/"), fupImagem.FileName);
-                fupImagem.SaveAs(caminho);
-            }
-
             Exercicio e = new Exercicio
             {
                 Nome = Nome,
                 Link = Link
             };
+
+            if (img != null)
+            {
+                string caminho = System.IO.Path.Combine
+                    (Server.MapPath("~/Images/"), img.FileName);
+                img.SaveAs(caminho);
+                Imagem imagem = new Imagem();
+                imagem.Caminho = caminho;
+                e.Imagens.Add(imagem);
+            }
+
+            
+            
 
             if(Session["USUARIO"] != null)
             {
