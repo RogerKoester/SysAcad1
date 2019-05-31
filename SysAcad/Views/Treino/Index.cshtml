@@ -11,31 +11,31 @@
     int i = 0;
 }
 
-@using (Html.BeginForm("Cadastrar", "Treino",FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Cadastrar", "Treino", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 
 {
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    <h2>Cadastrar treino</h2>
+        <h2>Cadastrar treino</h2>
 
-    <div id="Nome" class="form-group">
-        @Html.Label("Nome", new { @class = "control-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBox("txtNome", "", new { @class = "form-control", @placeholder = "Digite o nome do treino" })
+        <div id="Nome" class="form-group">
+            @Html.Label("Nome", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtNome", "", new { @class = "form-control", @placeholder = "Digite o nome do treino" })
+            </div>
         </div>
-    </div>
-    <div id="Descricao" class="form-group">
-        @Html.Label("Quantidade de treino", new { @class = "control-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBox("txtQuantidade", "", new { @class = "form-control", @placeholder = "Digite a quantidade" })
+        <div id="Descricao" class="form-group">
+            @Html.Label("Quantidade de treino", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtQuantidade", "", new { @class = "form-control", @placeholder = "Digite a quantidade" })
+            </div>
         </div>
-        </div>
-    
 
 
-        <div id="Usuario" class="form-group">            
+
+        <div id="Usuario" class="form-group">
             @Html.LabelFor(model => model.Usuario, new { @class = "control-label col-sm-2" })
-           
+
             <div class="col-sm-10">
                 @Html.DropDownList("Usuarios", null,
              " -- SELECIONE -- ",
@@ -43,20 +43,48 @@
             </div>
 
         </div>
-    <div id="DataExpiracao" class="form-group">
-        @Html.Label("Data de expiração", new { @class = "control-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBox("txtDataDeExpiracao", "", new { @class = "form-control", @placeholder = "Digite a data de expiração" })
+        <div id="DataExpiracao" class="form-group">
+            @Html.Label("Data de expiração", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.TextBox("txtDataDeExpiracao", "", new { @class = "form-control", @placeholder = "Digite a data de expiração" })
+            </div>
         </div>
-    </div>
+        <div id="Exercicios" class="form-group">
+            @Html.Label("Exercicios", new { @class = "control-label col-sm-2" })
+            <div class="col-sm-3">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default" id="panel">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+                                    Exercicios
+                                </a>
+                            </h4>
+                        </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @foreach ()
+                                {
+
+                                }
+                                <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+
+            </div>
+        </div>
+
     </div>
-      
-</div>
 }
 
 <table class="table">
@@ -76,6 +104,9 @@
         <th>
             @Html.DisplayNameFor(model => model.TreinosRealizados)
         </th>
+        <th>
+            Exercicio
+        </th>
 
     </tr>
     <tr></tr>
@@ -92,10 +123,10 @@
                 @Html.DisplayFor(modelItem => item.QuantidadeTreinos)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataExpiracao)
+                @item.DataExpiracao.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @if(item.TreinosRealizados == null)
+                @if (item.TreinosRealizados == null)
                 {
                     @("0")
                 }
@@ -105,44 +136,46 @@
                 }
 
             </td>
-        </tr>
-            <tr>
-                <td>
-                    <div class="panel-group" id="accordion_@i">
-                        <div class="panel panel-default" id="panel_@i">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
-                                        Exercicios
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne_@i" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    @if (item.ItensTreino != null)
+            <td>
+                <div class="panel-group" id="accordion_@i">
+                    <div class="panel panel-default" id="panel_@i">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
+                                    Exercicios
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne_@i" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @if (item.ItensTreino != null)
+
+                                {
+                                    foreach (ItemTreino itenTreino in item.ItensTreino)
                                     {
-                                        foreach (ItemTreino itenTreino in item.ItensTreino)
-                                        {
-                                            <h3 style="margin-top: auto">@itenTreino.Exercicio.Nome</h3>
+                                        <h3 style="margin-top: auto">@itenTreino.Exercicio.Nome</h3>
 
-                                            <ul class="list-group">
-                                                <li class="list-group-item col-sm-5 col-sm-offset-1">
-                                                    @("Repetições : " + itenTreino.Repeticoes.ToString())
-                                                </li>
-                                                <li class="list-group-item col-sm-5 col-sm-offset-1">
-                                                    @("Séries : " + itenTreino.Series.ToString())
-                                                </li>
-                                            </ul>
-                                        }
+                                        <ul class="list-group">
+                                            <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                            </li>
+                                            <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                @("Séries : " + itenTreino.Series.ToString())
+                                            </li>
+                                        </ul>
                                     }
+                                    i++;
+                                }
 
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                </td>
-            </tr>
-        i++;
+                </div>
+
+            </td>
+        </tr>
+
     }
 
 </table>
