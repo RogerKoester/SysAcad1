@@ -8,6 +8,7 @@
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
     List<Treino> treinos = ViewBag.Treinos;
+    List<Exercicio> exercicios = ViewBag.Exercicios;
     int i = 0;
 }
 
@@ -51,7 +52,7 @@
         </div>
         <div id="Exercicios" class="form-group">
             @Html.Label("Exercicios", new { @class = "control-label col-sm-2" })
-            <div class="col-sm-3">
+            <div class="col-sm-10">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default" id="panel">
                         <div class="panel-heading">
@@ -62,13 +63,16 @@
                             </h4>
                         </div>
 
-                        <div id="collapseOne" class="panel-collapse collapse in">
+                        <div id="collapseOne" class="panel-collapse collapse in" style="">
                             <div class="panel-body">
-                                @foreach ()
+                                @foreach (Exercicio e in exercicios)
                                 {
-
+                                    @Html.CheckBox("ListExercicios",false, new { @class = "col-sm-2" })
+                                    @Html.Label(e.Nome, new { @class = "col-sm-2"})
+                                    @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-sm-4" })
+                                    @Html.TextBox("series","", new { placeholder = "Séries", @class = "col-sm-4", @style = "margin-left:30px" })
                                 }
-                                <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                               
                             </div>
                         </div>
                     </div>
