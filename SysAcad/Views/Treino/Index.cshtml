@@ -10,13 +10,19 @@
     List<Treino> treinos = ViewBag.Treinos;
     List<Exercicio> exercicios = ViewBag.Exercicios;
     int i = 0;
+    int j = 0;
 }
 
 @using (Html.BeginForm("Cadastrar", "Treino", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 
 {
     <div class="form-horizontal">
-
+        @{
+            foreach (Exercicio e in exercicios)
+            {
+                @Html.Hidden("hdnList", e.ExercicioId)
+            }
+         }
         <h2>Cadastrar treino</h2>
 
         <div id="Nome" class="form-group">
@@ -65,14 +71,16 @@
 
                         <div id="collapseOne" class="panel-collapse collapse in" style="">
                             <div class="panel-body">
-                                @foreach (Exercicio e in exercicios)
-                                {
-                                    @Html.CheckBox("ListExercicios",false, new { @class = "col-sm-2" })
-                                    @Html.Label(e.Nome, new { @class = "col-sm-2"})
-                                    @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-sm-4" })
-                                    @Html.TextBox("series","", new { placeholder = "Séries", @class = "col-sm-4", @style = "margin-left:30px" })
+                                @{
+                                    foreach (Exercicio e in exercicios)
+                                    {
+                                        <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-sm-2" style = "margin-top:10px" />
+                                        @Html.Label(e.Nome, new { @class = "col-sm-2", @style = "margin-top:10px" })
+                                        @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-sm-4", @style = "margin-top:10px" })
+                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-sm-4", @style = "margin-left:30px; margin-top:10px" })
+                                        j++;
+                                    }
                                 }
-                               
                             </div>
                         </div>
                     </div>
@@ -150,7 +158,7 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne_@i" class="panel-collapse collapse in">
+                        <div id="collapseOne_@i" class="panel-collapse collapse">
                             <div class="panel-body">
                                 @if (item.ItensTreino != null)
 
@@ -183,6 +191,7 @@
     }
 
 </table>
+
 
 
 

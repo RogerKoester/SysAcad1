@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     string controller = ViewContext.RouteData.Values["controller"].ToString();
+
     if (Session["USUARIO"] == null && !controller.Equals("Login"))
     {
         Response.Redirect("~/Login/Index");

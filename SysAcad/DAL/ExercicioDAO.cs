@@ -16,6 +16,10 @@ namespace SysAcad.DAL
             return ctx.Exercicios.FirstOrDefault
                 (x => x.Nome.Equals(e.Nome));
         }
+        public static Exercicio BuscarExercicio(int i)
+        {
+            return ctx.Exercicios.Find(i);
+        }
 
         public static List<Exercicio> RetornarExercicios()
         {

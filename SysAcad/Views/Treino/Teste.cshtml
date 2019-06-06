@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Teste";
+    int quantidade = ViewBag.Teste;
+}
+
+<h2>Teste</h2>
+
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < quantidade; i++)
+    {
+        <input type="checkbox" value="Texto" name="checkbox" id="@i" />
+    }
+    <input type="submit" value="Teste" />
+}
+

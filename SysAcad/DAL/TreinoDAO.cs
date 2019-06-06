@@ -32,18 +32,9 @@ namespace SysAcad.DAL
 
         public static bool CadastrarTreino(Treino treino)
         {
-            Treino t = BuscarTreinoPorNome(treino);
-
-            if (t == null)
-            {
-                ctx.Treinos.Add(treino);
-                ctx.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            ctx.Treinos.Add(treino);
+            ctx.SaveChanges();
+            return true;
         }
     }
 }
