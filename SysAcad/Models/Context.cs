@@ -18,5 +18,7 @@ namespace SysAcad.Models
         public DbSet<Treino> Treinos { get; set; }
         public DbSet<Finalizacao> Finalizacoes { get; set; }
         public DbSet<Imagem> Imagens { get; set; }
+        public DbSet<TreinoAtual> TreinosAtuais { get; set; }
+
     }
 }
