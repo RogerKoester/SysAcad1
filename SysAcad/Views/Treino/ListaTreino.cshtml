@@ -9,82 +9,72 @@
     }
     SysAcad.Models.Usuario usuario = ViewBag.Usuario;
 }
-<!DOCTYPE html>
+<table class="table">
+    <tr>
+        <th>
+            <h4>Nome</h4>
+        </th>
+        <th>
+            <h4>Quantidade de treinos</h4>
+        </th>
+        <th>
+            <h4>Data de expiração</h4>
+        </th>
+        <th>
+            <h4>Treinos realizados</h4>
+        </th>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ListaTreino</title>
-</head>
-<body>
-    <table class="table">
+    </tr>
+    <tr></tr>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantidadeTreinos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataExpiracao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TreinosRealizados)
-            </th>
-            
-        </tr>
-        <tr>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantidadeTreinos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataExpiracao)
-                </td>
-                <td>
-                    @(item.TreinosRealizados.Count.ToString())
-                </td>
-            </tr>
-            <tr class="col-lg-12">
-                <td class="col-lg-12">
-                    <div class="panel-group col-lg-12" id="accordion_@i">
-                        <div class="panel panel-default" id="panel_@i">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
-                                        Exercicios
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne_@i" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    @foreach (ItemTreino itenTreino in item.ItensTreino)
-                                    {
-                                        <h3>@itenTreino.Exercicio.Nome</h3>
+            <td>
+                <h3>@(item.Nome)</h3>
+            </td>
+            <td>
+                <h3>@(item.QuantidadeTreinos)</h3>
+            </td>
+            <td>
+                <h3>@(item.DataExpiracao.ToString("dd/MM/yyyy"))</h3>
+            </td>
+            <td>
+                <h3>@(item.TreinosRealizados.Count.ToString())</h3>
+            </td>
+            <td>
+                <div class="panel-group" id="accordion_@i">
+                    <div class="panel panel-default" id="panel_@i">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
+                                    Exercicios
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne_@i" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                @foreach (ItemTreino itenTreino in item.ItensTreino)
+                                {
+                                    <h3>@itenTreino.Exercicio.Nome</h3>
                                         <ul class="list-group">
                                             <li class="list-group-item">
                                                 @("Repetições : " + itenTreino.Repeticoes.ToString())
                                             </li>
                                             <li class="list-group-item">
-                                                @("Repetições : " + itenTreino.Series.ToString())
+                                                @("Séries : " + itenTreino.Series.ToString())
                                             </li>
                                         </ul>
-                                    }
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>
+                </div>
+            </td>
+            <td>
+                @Html.ActionLink("Iniciar treino", "IniciarTreino", "Treino", new {@class = "btn btn-danger" })
                 </td>
             </tr>
-            i++;
-        }
+        i++;
+    }
 
-    </table>
-</body>
-</html>
+</table>

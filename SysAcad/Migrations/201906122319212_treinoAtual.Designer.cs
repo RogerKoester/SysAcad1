@@ -7,13 +7,13 @@ namespace SysAcad.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class criarbanco : IMigrationMetadata
+    public sealed partial class treinoAtual : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(criarbanco));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(treinoAtual));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905312216148_criarbanco"; }
+            get { return "201906122319212_treinoAtual"; }
         }
         
         string IMigrationMetadata.Source

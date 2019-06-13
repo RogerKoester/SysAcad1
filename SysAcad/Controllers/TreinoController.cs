@@ -101,5 +101,18 @@ namespace SysAcad.Controllers
 
             return View(TreinoDAO.RetornarTreinoPorUsuario(u));
         }
+
+
+        public ActionResult TreinoAtual(int treinoId)
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+            }
+
+            return View();
+        }
     }
 }
