@@ -13,7 +13,7 @@ namespace SysAcad.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905172238382_criarbanco"; }
+            get { return "201905312216148_criarbanco"; }
         }
         
         string IMigrationMetadata.Source

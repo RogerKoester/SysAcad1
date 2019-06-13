@@ -45,11 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -170,14 +170,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905172238382_criarbanco.cs" />
-    <Compile Include="Migrations\201905172238382_criarbanco.Designer.cs">
-      <DependentUpon>201905172238382_criarbanco.cs</DependentUpon>
+    <Compile Include="Migrations\201905292222312_projeto.cs" />
+    <Compile Include="Migrations\201905292222312_projeto.Designer.cs">
+      <DependentUpon>201905292222312_projeto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905292308147_adicaodeimagensdeexercicio.cs" />
+    <Compile Include="Migrations\201905292308147_adicaodeimagensdeexercicio.Designer.cs">
+      <DependentUpon>201905292308147_adicaodeimagensdeexercicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905292320260_imagem.cs" />
+    <Compile Include="Migrations\201905292320260_imagem.Designer.cs">
+      <DependentUpon>201905292320260_imagem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905292359049_listadeimagemexercicio.cs" />
+    <Compile Include="Migrations\201905292359049_listadeimagemexercicio.Designer.cs">
+      <DependentUpon>201905292359049_listadeimagemexercicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300008106_ImagensExercicio.cs" />
+    <Compile Include="Migrations\201905300008106_ImagensExercicio.Designer.cs">
+      <DependentUpon>201905300008106_ImagensExercicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300027317_teste.cs" />
+    <Compile Include="Migrations\201905300027317_teste.Designer.cs">
+      <DependentUpon>201905300027317_teste.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905312216148_criarbanco.cs" />
+    <Compile Include="Migrations\201905312216148_criarbanco.Designer.cs">
+      <DependentUpon>201905312216148_criarbanco.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Exercicio.cs" />
     <Compile Include="Models\Finalizacao.cs" />
+    <Compile Include="Models\Imagem.cs" />
     <Compile Include="Models\ItemTreino.cs" />
     <Compile Include="Models\Periodo.cs" />
     <Compile Include="Models\Peso.cs" />
@@ -236,10 +261,11 @@
     <Content Include="Views\Usuario\Cadastro.cshtml" />
     <Content Include="Views\Usuario\Alterar.cshtml" />
     <Content Include="Views\Treino\Index.cshtml" />
+    <Content Include="Views\Treino\Teste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\" />
+    <Folder Include="Images\" />
     <Folder Include="Views\Periodo\" />
     <Folder Include="Views\Super\" />
   </ItemGroup>
@@ -255,8 +281,26 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905172238382_criarbanco.resx">
-      <DependentUpon>201905172238382_criarbanco.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905292222312_projeto.resx">
+      <DependentUpon>201905292222312_projeto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905292308147_adicaodeimagensdeexercicio.resx">
+      <DependentUpon>201905292308147_adicaodeimagensdeexercicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905292320260_imagem.resx">
+      <DependentUpon>201905292320260_imagem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905292359049_listadeimagemexercicio.resx">
+      <DependentUpon>201905292359049_listadeimagemexercicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300008106_ImagensExercicio.resx">
+      <DependentUpon>201905300008106_ImagensExercicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300027317_teste.resx">
+      <DependentUpon>201905300027317_teste.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905312216148_criarbanco.resx">
+      <DependentUpon>201905312216148_criarbanco.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,7 @@
 
 
 @using (Html.BeginForm("Cadastrar", "Exercicio",
-                                            FormMethod.Post, new { @class = "form-horizontal" }))
+                                            FormMethod.Post, new { @class = "form-horizontal", enctype= "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -42,7 +42,7 @@
 
         <div id="Imagem" class="form-group">
             <div class="col-sm-10">
-                <input type="file" name="img" id="img"
+                <input type="file" name="fupImagem" id="fupImagem"
                        class="form-control-file" />
 
             </div>
@@ -58,9 +58,11 @@
 }
     <table class="table table-hover table-striped">
         <tr>
+
             <th>Nome</th>
             <th>Link</th>
             <th>Dono</th>
+            <th>Imagem</th>
             <th></th>
             <th></th>
 
@@ -77,6 +79,16 @@
                     </a>
                 </td>
                 <td>@exercicio.UsuarioDono.Nome</td>
+                @{
+                    if (exercicio.Imagens != null)
+                    {
+                        <td>
+                            <img src="~/Images/@exercicio.Imagens[0].Caminho"
+                                 style="width:100px" />
+                        </td>
+                    }
+                }
+
                 <td>@Html.ActionLink("Remover", "Remover", "Exercicio",
                    new { id = exercicio.ExercicioId},
                    new { @class = "btn btn-danger" })</td>
