@@ -10,9 +10,9 @@ namespace SysAcad.DAL
     {
         private static Context ctx = SingletonContext.GetInstance();
 
-        public static Treino BuscarTreino(Treino e)
+        public static Treino BuscarTreino(int? e)
         {
-            return ctx.Treinos.Find(e.TreinoId);
+            return ctx.Treinos.Include("Usuario").FirstOrDefault(x => x.TreinoId == e);
         }
 
         public static List<Treino> RetornarTreinoPorUsuario(Usuario u)
