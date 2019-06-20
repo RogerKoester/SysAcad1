@@ -1,7 +1,9 @@
-﻿using SysAcad.DAL;
+﻿using Firebase.Storage;
+using SysAcad.DAL;
 using SysAcad.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,14 +28,14 @@ namespace SysAcad.Controllers
         {
             if (id == null)
             {
-                
+
             }
             else
             {
                 ExercicioDAO.ExcluirExercicio(id);
             }
-               
-            return RedirectToAction("Index", "Exercicio"); 
+
+            return RedirectToAction("Index", "Exercicio");
         }
         public ActionResult Alterar(string nome)
         {
@@ -69,7 +71,7 @@ namespace SysAcad.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(string Nome, string Link, HttpPostedFileBase fupImagem)
+        public async System.Threading.Tasks.Task<ActionResult> Cadastrar(string Nome, string Link, HttpPostedFileBase fupImagem)
         {
             Exercicio e = new Exercicio
             {
@@ -77,23 +79,22 @@ namespace SysAcad.Controllers
                 Link = Link,
                 Imagens = new List<Imagem>()
             };
-
             if (fupImagem != null)
             {
-                string caminho = System.IO.Path.Combine
-                    (Server.MapPath("~/Images/"), fupImagem.FileName);
-                fupImagem.SaveAs(caminho);
+                //TODO criar logica de nome para as imagens
+                //TODO descobrir como mostrar a imagem a partir do link
+                var task = new FirebaseStorage("sysacad-23935.appspot.com")
+                .Child("main")
+                .Child((DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString())
+                .PutAsync(fupImagem.InputStream);
+                var downloadUrl = await task;
                 Imagem imagem = new Imagem();
-                imagem.Caminho = fupImagem.FileName;
+                imagem.Caminho = downloadUrl;
                 e.Imagens.Add(imagem);
             }
-
-            
-            
-
-            if(Session["USUARIO"] != null)
+            if (Session["USUARIO"] != null)
             {
-                e.UsuarioDono = (Usuario) Session["USUARIO"];
+                e.UsuarioDono = (Usuario)Session["USUARIO"];
             }
             else
             {
@@ -108,6 +109,6 @@ namespace SysAcad.Controllers
                 return RedirectToAction("Error");
             }
         }
-        
+
     }
 }
