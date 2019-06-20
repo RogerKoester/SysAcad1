@@ -1,13 +1,45 @@
-﻿
+﻿@using SysAcad.Models
 @{
     ViewBag.Title = "TreinoAtual";
     if (ViewBag.IsAdmin)
     {
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
+    Treino t = ViewBag.TreinoAtual;
 }
 
-<h2>Treino Atual</h2>
+<h2>@t.Nome</h2>
+<table class="table table-hover table-striped">
+    <tr>
+        <th></th>
+        <th>Nome</th>
+        <th>Link</th>
 
-
-
+    </tr>
+    @foreach (SysAcad.Models.ItemTreino itemTreino in t.ItensTreino)
+    {
+        <tr>
+            @if (itemTreino.Exercicio.Imagens != null)
+            {
+            <td>
+                <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
+                     style="width:100px" />
+            </td>
+            }
+            else
+            {
+            <td>
+                Sem imagem
+            </td>
+            }
+            <td>@itemTreino.Exercicio.Nome</td>
+            <td>
+                <a href="@itemTreino.Exercicio.Link">
+                    <div style="height:100%;width:100%">
+                        @itemTreino.Exercicio.Link
+                    </div>
+                </a>
+            </td>
+        </tr>
+    }
+</table>

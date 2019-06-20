@@ -103,7 +103,20 @@ namespace SysAcad.Controllers
         }
 
 
-        public ActionResult TreinoAtual(int treinoId)
+        public ActionResult TreinoAtual()
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+                ViewBag.TreinoAtual = TreinoDAO.BuscarTreino(TreinoAtualDAO.BuscarTreinoAtualUsuario(user).Treino.TreinoId);
+            }
+
+            return View();
+        }
+
+        public ActionResult IniciarTreino(int? id)
         {
             if (Session["USUARIO"] != null)
             {
@@ -111,8 +124,18 @@ namespace SysAcad.Controllers
                 ViewBag.IsAdmin = user.IsAdmin;
                 ViewBag.Usuario = user;
             }
-
-            return View();
+            TreinoAtual t = new TreinoAtual();
+            Treino treino = TreinoDAO.BuscarTreino(id);
+            t.Treino = treino;
+            t.Usuario = treino.Usuario;
+            if (!TreinoAtualDAO.Cadastrar(t))
+            {
+                return RedirectToAction("Error");
+            }
+            else
+            {
+                return RedirectToAction("TreinoAtual");
+            }
         }
     }
 }

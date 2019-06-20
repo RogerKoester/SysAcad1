@@ -10,15 +10,25 @@ namespace SysAcad.DAL
     {
         private static Context ctx = SingletonContext.GetInstance();
 
-        public static Treino BuscarTreinoAtualUsuario(Usuario u )
+        public static TreinoAtual BuscarTreinoAtualUsuario(Usuario u)
         {
-            return ctx.Treinos.FirstOrDefault(x => x.Usuario.UsuarioId == u.UsuarioId);
+            return ctx.TreinosAtuais.Include("Usuario").Include("Treino").FirstOrDefault(x => x.Usuario.UsuarioId == u.UsuarioId);
         }
 
-        public static void Cadastrar(TreinoAtual t)
+        public static bool Cadastrar(TreinoAtual t)
         {
-            ctx.TreinosAtuais.Add(t);
-            ctx.SaveChanges();
+            TreinoAtual treino = BuscarTreinoAtualUsuario(t.Usuario);
+            if (treino == null)
+            {
+                ctx.TreinosAtuais.Add(t);
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
