@@ -114,7 +114,7 @@
             @Html.DisplayNameFor(model => model.DataExpiracao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TreinosRealizados)
+            @Html.DisplayNameFor(model => model.TentativasDeTreino)
         </th>
         <th>
             Exercicio
@@ -138,13 +138,13 @@
                 @item.DataExpiracao.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @if (item.TreinosRealizados == null)
+                @if (item.TentativasDeTreino == null)
                 {
                     @("0")
                 }
                 else
                 {
-                    @(item.TreinosRealizados.Count.ToString())
+                    @(item.TentativasDeTreino.Count.ToString())
                 }
 
             </td>

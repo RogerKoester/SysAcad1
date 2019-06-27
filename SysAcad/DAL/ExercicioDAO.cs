@@ -23,7 +23,7 @@ namespace SysAcad.DAL
 
         public static List<Exercicio> RetornarExercicios()
         {
-            return ctx.Exercicios.ToList();
+            return ctx.Exercicios.Include("Imagens").Include("UsuarioDono").ToList();
         }
         public static bool ExcluirExercicio(int? id)
         {

@@ -6,31 +6,42 @@
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
     Treino t = ViewBag.TreinoAtual;
+    TentativaDeTreino tentativaAtual = t.TentativasDeTreino.Last();
 }
 
 <h2>@t.Nome</h2>
+<div>
+    @tentativaAtual.ExercicioAtual.Nome
+    @Html.TextBox("txtMedida", "", null, null)
+    <select name="Unidades">
+        <option value="valor1">Kg</option>
+        <option value="valor2" selected>Minutos</option>
+    </select>
+</div>
 <table class="table table-hover table-striped">
     <tr>
         <th></th>
         <th>Nome</th>
         <th>Link</th>
+        <th>Séries</th>
+        <th>Repetições</th>
 
     </tr>
-    @foreach (SysAcad.Models.ItemTreino itemTreino in t.ItensTreino)
+    @foreach (ItemTreino itemTreino in t.ItensTreino)
     {
-        <tr>
-            @if (itemTreino.Exercicio.Imagens != null)
+        <tr bgcolor="#FF0000">
+            @if (itemTreino.Exercicio.Imagens != null && itemTreino.Exercicio.Imagens.Count > 0)
             {
-            <td>
-                <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
-                     style="width:100px" />
-            </td>
+                <td>
+                    <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
+                         style="width:100px" />
+                </td>
             }
             else
             {
-            <td>
-                Sem imagem
-            </td>
+                <td>
+                    Sem imagem
+                </td>
             }
             <td>@itemTreino.Exercicio.Nome</td>
             <td>
@@ -40,6 +51,8 @@
                     </div>
                 </a>
             </td>
+            <td>@itemTreino.Series</td>
+            <td>@itemTreino.Repeticoes</td>
         </tr>
     }
 </table>

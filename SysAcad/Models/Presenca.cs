@@ -13,6 +13,7 @@ namespace SysAcad.Models
         [Key]
         public int PresencaId { get; set; }
         public DateTime Chegada { get; set; }
+        
         public DateTime Saida { get; set; }
     }
 }

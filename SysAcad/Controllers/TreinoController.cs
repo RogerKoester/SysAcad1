@@ -78,7 +78,7 @@ namespace SysAcad.Controllers
                 Usuario = UsuarioDAO.BuscarUsuario(Usuarios),
                 DataExpiracao = Convert.ToDateTime(txtDataDeExpiracao),
                 QuantidadeTreinos = Convert.ToInt16(txtQuantidade),
-                TreinosRealizados = new List<Finalizacao>(),
+                TentativasDeTreino = new List<TentativaDeTreino>(),
                 ItensTreino = itensTreino
             };
             if (TreinoDAO.CadastrarTreino(t))
@@ -110,7 +110,15 @@ namespace SysAcad.Controllers
                 Usuario user = (Usuario)Session["USUARIO"];
                 ViewBag.IsAdmin = user.IsAdmin;
                 ViewBag.Usuario = user;
-                ViewBag.TreinoAtual = TreinoDAO.BuscarTreino(TreinoAtualDAO.BuscarTreinoAtualUsuario(user).Treino.TreinoId);
+                TreinoAtual t = TreinoAtualDAO.BuscarTreinoAtualUsuario(user);
+                if (t != null)
+                {
+                    ViewBag.TreinoAtual = TreinoDAO.BuscarTreino(t.Treino.TreinoId);
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
             }
 
             return View();
@@ -123,18 +131,33 @@ namespace SysAcad.Controllers
                 Usuario user = (Usuario)Session["USUARIO"];
                 ViewBag.IsAdmin = user.IsAdmin;
                 ViewBag.Usuario = user;
-            }
-            TreinoAtual t = new TreinoAtual();
-            Treino treino = TreinoDAO.BuscarTreino(id);
-            t.Treino = treino;
-            t.Usuario = treino.Usuario;
-            if (!TreinoAtualDAO.Cadastrar(t))
-            {
-                return RedirectToAction("Error");
+                TreinoAtual t = new TreinoAtual();
+                Treino treino = TreinoDAO.BuscarTreino(id);
+                t.Treino = treino;
+                t.Usuario = treino.Usuario;
+                Usuario u = UsuarioDAO.BuscarUsuario(user.UsuarioId);
+                TentativaDeTreino tentativa = new TentativaDeTreino();
+                tentativa.Inicio = DateTime.Now;
+                tentativa.Termino = DateTime.Now;
+                if (treino.TentativasDeTreino == null)
+                {
+                    treino.TentativasDeTreino = new List<TentativaDeTreino>();
+                }
+                treino.TentativasDeTreino.Add(tentativa);
+                TreinoDAO.Alterar(treino);
+
+                if (!TreinoAtualDAO.Cadastrar(t))
+                {
+                    return RedirectToAction("Error");
+                }
+                else
+                {
+                    return RedirectToAction("TreinoAtual");
+                }
             }
             else
             {
-                return RedirectToAction("TreinoAtual");
+                return RedirectToRoute("Login");
             }
         }
     }

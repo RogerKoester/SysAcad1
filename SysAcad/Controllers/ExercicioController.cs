@@ -81,8 +81,9 @@ namespace SysAcad.Controllers
             };
             if (fupImagem != null)
             {
-                //TODO criar logica de nome para as imagens
                 //TODO descobrir como mostrar a imagem a partir do link
+                //Install-Package FirebaseAuthentication.net
+                //Install-Package FirebaseStorage.net -pre
                 var task = new FirebaseStorage("sysacad-23935.appspot.com")
                 .Child("main")
                 .Child((DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString())

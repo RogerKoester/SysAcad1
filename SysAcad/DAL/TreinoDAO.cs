@@ -1,6 +1,7 @@
 ﻿using SysAcad.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -12,17 +13,17 @@ namespace SysAcad.DAL
 
         public static Treino BuscarTreino(int? e)
         {
-            return ctx.Treinos.Include("Usuario").FirstOrDefault(x => x.TreinoId == e);
+            return ctx.Treinos.Include("Usuario").Include("ItensTreino.Exercicio").Include("TentativasDeTreino").FirstOrDefault(x => x.TreinoId == e);
         }
 
         public static List<Treino> RetornarTreinoPorUsuario(Usuario u)
         {
-            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
+            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TentativasDeTreino").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
         }
 
         public static List<Treino> RetornarTreinos()
         {
-            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TreinosRealizados").ToList();
+            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TentativasDeTreino").ToList();
         }
 
         public static Treino BuscarTreinoPorNome(Treino t)
@@ -33,6 +34,15 @@ namespace SysAcad.DAL
         public static bool CadastrarTreino(Treino treino)
         {
             ctx.Treinos.Add(treino);
+            ctx.SaveChanges();
+            return true;
+        }
+
+        public static bool Alterar(Treino t)
+        {
+            Treino treino = ctx.Treinos.Find(t.TreinoId);
+            DbEntityEntry<Treino> ee = ctx.Entry(treino);
+            ee.CurrentValues.SetValues(treino);
             ctx.SaveChanges();
             return true;
         }
