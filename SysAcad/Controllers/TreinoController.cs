@@ -133,17 +133,18 @@ namespace SysAcad.Controllers
                 ViewBag.Usuario = user;
                 TreinoAtual t = new TreinoAtual();
                 Treino treino = TreinoDAO.BuscarTreino(id);
-                t.Treino = treino;
                 t.Usuario = treino.Usuario;
                 Usuario u = UsuarioDAO.BuscarUsuario(user.UsuarioId);
                 TentativaDeTreino tentativa = new TentativaDeTreino();
                 tentativa.Inicio = DateTime.Now;
                 tentativa.Termino = DateTime.Now;
+                tentativa.ItemTreinoAtual = treino.ItensTreino.First();
                 if (treino.TentativasDeTreino == null)
                 {
                     treino.TentativasDeTreino = new List<TentativaDeTreino>();
                 }
                 treino.TentativasDeTreino.Add(tentativa);
+                t.Treino = treino;
                 TreinoDAO.Alterar(treino);
 
                 if (!TreinoAtualDAO.Cadastrar(t))

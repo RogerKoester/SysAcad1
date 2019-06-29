@@ -12,7 +12,7 @@ namespace SysAcad.DAL
 
         public static TreinoAtual BuscarTreinoAtualUsuario(Usuario u)
         {
-            return ctx.TreinosAtuais.Include("Usuario").Include("Treino").FirstOrDefault(x => x.Usuario.UsuarioId == u.UsuarioId);
+            return ctx.TreinosAtuais.Include("Usuario").Include("Treino.TentativasDeTreino.ItemTreinoAtual").FirstOrDefault(x => x.Usuario.UsuarioId == u.UsuarioId);
         }
 
         public static bool Cadastrar(TreinoAtual t)

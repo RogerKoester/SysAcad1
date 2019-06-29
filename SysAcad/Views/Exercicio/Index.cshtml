@@ -2,8 +2,9 @@
 
 @{
     ViewBag.Title = "Cadastrar";
-    List<SysAcad.Models.Exercicio>ListaExercicios = ViewBag.ListaExercicios;
-    if (ViewBag.IsAdmin){
+    List<SysAcad.Models.Exercicio> ListaExercicios = ViewBag.ListaExercicios;
+    if (ViewBag.IsAdmin)
+    {
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
     else
@@ -16,7 +17,7 @@
 
 
 @using (Html.BeginForm("Cadastrar", "Exercicio",
-                                            FormMethod.Post, new { @class = "form-horizontal", enctype= "multipart/form-data" }))
+                                                        FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -56,51 +57,54 @@
     </div>
     <hr />
 }
-    <table class="table table-hover table-striped">
+<table class="table">
+    <tr>
+
+        <th>Nome</th>
+        <th>Link</th>
+        <th>Dono</th>
+        <th>Imagem</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    @foreach (SysAcad.Models.Exercicio exercicio in ListaExercicios)
+    {
         <tr>
-
-            <th>Nome</th>
-            <th>Link</th>
-            <th>Dono</th>
-            <th>Imagem</th>
-            <th></th>
-            <th></th>
-
-        </tr>
-        @foreach (SysAcad.Models.Exercicio exercicio in ListaExercicios)
-        {
-            <tr>
-                <td>@exercicio.Nome</td>
-                <td>
-                    <a href="@exercicio.Link">
-                        <div style="height:100%;width:100%">
-                            @exercicio.Link
-                        </div>
-                    </a>
-                </td>
-                <td>@exercicio.UsuarioDono.Nome</td>
-                @{
-                    if (exercicio.Imagens != null)
-                    {
-                        <td>
-                            <img src="@exercicio.Imagens[0].Caminho"
-                                 style="width:100px" />
-                        </td>
-                    }
+            <td>@exercicio.Nome</td>
+            <td>
+                <a href="@exercicio.Link">
+                    <div style="height:100%;width:100%">
+                        @exercicio.Link
+                    </div>
+                </a>
+            </td>
+            <td>@exercicio.UsuarioDono.Nome</td>
+            @{
+                if (exercicio.Imagens != null && exercicio.Imagens.Count > 0)
+                {
+                    <td>
+                        <img src="@exercicio.Imagens[0].Caminho"
+                             style="width:100px" />
+                    </td>
                 }
+            }
 
-                <td>@Html.ActionLink("Remover", "Remover", "Exercicio",
-                   new { id = exercicio.ExercicioId},
-                   new { @class = "btn btn-danger" })</td>
-                <td>
-                    @Html.ActionLink("Alterar", "Alterar", "Exercicio",
+            <td>
+                @Html.ActionLink("Remover", "Remover", "Exercicio",
+                   new { id = exercicio.ExercicioId },
+                   new { @class = "btn btn-danger" })
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Alterar", "Exercicio",
                    new { nome = exercicio.Nome },
                    new { @class = "btn btn-warning" })
-            </td>
+        </td>
 
-            </tr>
-        }
-    </table>
+    </tr>
+                }
+
+</table>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

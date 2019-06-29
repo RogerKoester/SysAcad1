@@ -70,14 +70,19 @@
                         </div>
 
                         <div id="collapseOne" class="panel-collapse collapse in" style="">
-                            <div class="panel-body">
+                            <div class="row">
                                 @{
                                     foreach (Exercicio e in exercicios)
                                     {
-                                        <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-sm-2" style = "margin-top:10px" />
-                                        @Html.Label(e.Nome, new { @class = "col-sm-2", @style = "margin-top:10px" })
-                                        @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-sm-4", @style = "margin-top:10px" })
-                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-sm-4", @style = "margin-left:30px; margin-top:10px" })
+                                        string nomeButton = "button"+j;
+                                        <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-lg-1" style = "margin-top:10px" />
+                                        @Html.Label(e.Nome, new { @class = "col-lg-2", @style = "margin-top:10px" })
+                                        <button onclick="myFunction(@j)" type="button" id="@nomeButton" class="col-sm-1">Kg</button>
+                                        @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-lg-4", @style = "margin-top:10px" })
+                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-lg-4", @style = "margin-left:30px; margin-top:10px" })
+                                        @Html.TextBox("horas", "", new { placeholder = "Horas", @class = "col-lg-4", @style = "display:none; margin-top:10px" })
+                                        @Html.TextBox("minutos", "", new { placeholder = "Minutos", @class = "col-lg-4", @style = "display:none; margin-left:30px; margin-top:10px" })
+
                                         j++;
                                     }
                                 }
@@ -174,8 +179,7 @@
                                             <li class="list-group-item col-sm-5 col-sm-offset-1">
                                                 @("Séries : " + itenTreino.Series.ToString())
                                             </li>
-                                        </ul>
-                                    }
+                                        </ul>                                    }
                                     i++;
                                 }
 
@@ -191,6 +195,31 @@
     }
 
 </table>
+
+<script>
+        function myFunction() {
+            var btn = document.getElementById("button" + arguments[0]);
+            var minutos = document.getElementById("minutos" + arguments[0]);
+            var horas = document.getElementById("horas" + arguments[0]);
+            var series = document.getElementById("series" + arguments[0]);
+            var repeticoes = document.getElementById("repeticoes" + arguments[0]);
+
+            if (btn.textContent == "Kg") {
+                series.style.display = "none"
+                repeticoes.style.display = "none"
+                minutos.style.display = "block"
+                horas.style.display = "block"
+                btn.textContent = "Minutos"
+            } else {
+                series.style.display = "block"
+                repeticoes.style.display = "block"
+                minutos.style.display = "none"
+                horas.style.display = "none"
+                btn.textContent = "Kg"
+
+            }
+        }
+</script>
 
 
 

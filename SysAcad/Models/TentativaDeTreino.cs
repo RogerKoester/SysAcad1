@@ -14,7 +14,7 @@ namespace SysAcad.Models
         public int TentativaDeTreinoId { get; set; }
         public DateTime Inicio { get; set; }
         public DateTime Termino { get; set; }
-        public Exercicio ExercicioAtual { get; set; }
+        public ItemTreino ItemTreinoAtual { get; set; }
 
     }
 }
