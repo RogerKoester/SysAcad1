@@ -52,6 +52,18 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Firebase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseDatabase.net.4.0.1\lib\net452\Firebase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Firebase.Auth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseAuthentication.net.3.2.0\lib\netstandard1.1\Firebase.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseStorage.net.1.0.3\lib\netstandard1.1\Firebase.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -85,15 +97,59 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -146,21 +202,19 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExercicioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Controllers\SysAcadApiController.cs" />
     <Compile Include="Controllers\TreinoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\ExercicioDAO.cs" />
@@ -171,43 +225,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905292222312_projeto.cs" />
-    <Compile Include="Migrations\201905292222312_projeto.Designer.cs">
-      <DependentUpon>201905292222312_projeto.cs</DependentUpon>
+    <Compile Include="Migrations\201906270042184_tentativa.cs" />
+    <Compile Include="Migrations\201906270042184_tentativa.Designer.cs">
+      <DependentUpon>201906270042184_tentativa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905292308147_adicaodeimagensdeexercicio.cs" />
-    <Compile Include="Migrations\201905292308147_adicaodeimagensdeexercicio.Designer.cs">
-      <DependentUpon>201905292308147_adicaodeimagensdeexercicio.cs</DependentUpon>
+    <Compile Include="Migrations\201906270120227_tentativaExercicio.cs" />
+    <Compile Include="Migrations\201906270120227_tentativaExercicio.Designer.cs">
+      <DependentUpon>201906270120227_tentativaExercicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905292320260_imagem.cs" />
-    <Compile Include="Migrations\201905292320260_imagem.Designer.cs">
-      <DependentUpon>201905292320260_imagem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905292359049_listadeimagemexercicio.cs" />
-    <Compile Include="Migrations\201905292359049_listadeimagemexercicio.Designer.cs">
-      <DependentUpon>201905292359049_listadeimagemexercicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905300008106_ImagensExercicio.cs" />
-    <Compile Include="Migrations\201905300008106_ImagensExercicio.Designer.cs">
-      <DependentUpon>201905300008106_ImagensExercicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905300027317_teste.cs" />
-    <Compile Include="Migrations\201905300027317_teste.Designer.cs">
-      <DependentUpon>201905300027317_teste.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905312216148_criarbanco.cs" />
-    <Compile Include="Migrations\201905312216148_criarbanco.Designer.cs">
-      <DependentUpon>201905312216148_criarbanco.cs</DependentUpon>
+    <Compile Include="Migrations\201906282230010_addItemTreino.cs" />
+    <Compile Include="Migrations\201906282230010_addItemTreino.Designer.cs">
+      <DependentUpon>201906282230010_addItemTreino.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Exercicio.cs" />
-    <Compile Include="Models\Finalizacao.cs" />
     <Compile Include="Models\Imagem.cs" />
     <Compile Include="Models\ItemTreino.cs" />
     <Compile Include="Models\Periodo.cs" />
     <Compile Include="Models\Peso.cs" />
     <Compile Include="Models\Presenca.cs" />
+    <Compile Include="Models\TentativaDeTreino.cs" />
     <Compile Include="Models\Treino.cs" />
     <Compile Include="Models\TreinoAtual.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -264,6 +302,8 @@
     <Content Include="Views\Usuario\Alterar.cshtml" />
     <Content Include="Views\Treino\Index.cshtml" />
     <Content Include="Views\Treino\Teste.cshtml" />
+    <Content Include="Views\Treino\ListaTreino.cshtml" />
+    <Content Include="Views\Treino\TreinoAtual.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -283,26 +323,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905292222312_projeto.resx">
-      <DependentUpon>201905292222312_projeto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906270042184_tentativa.resx">
+      <DependentUpon>201906270042184_tentativa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905292308147_adicaodeimagensdeexercicio.resx">
-      <DependentUpon>201905292308147_adicaodeimagensdeexercicio.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906270120227_tentativaExercicio.resx">
+      <DependentUpon>201906270120227_tentativaExercicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905292320260_imagem.resx">
-      <DependentUpon>201905292320260_imagem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905292359049_listadeimagemexercicio.resx">
-      <DependentUpon>201905292359049_listadeimagemexercicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905300008106_ImagensExercicio.resx">
-      <DependentUpon>201905300008106_ImagensExercicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905300027317_teste.resx">
-      <DependentUpon>201905300027317_teste.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905312216148_criarbanco.resx">
-      <DependentUpon>201905312216148_criarbanco.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906282230010_addItemTreino.resx">
+      <DependentUpon>201906282230010_addItemTreino.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

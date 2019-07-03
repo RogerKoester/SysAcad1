@@ -75,14 +75,13 @@
                                     foreach (Exercicio e in exercicios)
                                     {
                                         string nomeButton = "button"+j;
-                                        <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-lg-1" style = "margin-top:10px" />
+                                        <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-lg-2" style = "margin-top:10px" />
                                         @Html.Label(e.Nome, new { @class = "col-lg-2", @style = "margin-top:10px" })
-                                        <button onclick="myFunction(@j)" type="button" id="@nomeButton" class="col-sm-1">Kg</button>
-                                        @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-lg-4", @style = "margin-top:10px" })
-                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-lg-4", @style = "margin-left:30px; margin-top:10px" })
-                                        @Html.TextBox("horas", "", new { placeholder = "Horas", @class = "col-lg-4", @style = "display:none; margin-top:10px" })
-                                        @Html.TextBox("minutos", "", new { placeholder = "Minutos", @class = "col-lg-4", @style = "display:none; margin-left:30px; margin-top:10px" })
-
+                                        @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-lg-2", @style = "margin-top:10px" })
+                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-lg-2", @style = "margin-top:10px" })
+                                        @Html.TextBox("horas", "", new { placeholder = "Horas", @class = "col-lg-1", @style = "margin-top:10px" })
+                                        @Html.TextBox("minutos", "", new { placeholder = "Minutos", @class = "col-lg-1 col-xs-offset-2", @style = "margin-top:10px" })
+                               
                                         j++;
                                     }
                                 }
