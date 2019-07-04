@@ -10,6 +10,7 @@ namespace SysAcad.Models
     {
         public Context() : base("DbSysAcad") { }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Tempo> Tempos { get; set; }
         public DbSet<Exercicio> Exercicios { get; set; }
         public DbSet<ItemTreino> ItensTreino { get; set; }
         public DbSet<Periodo> Periodos { get; set; }

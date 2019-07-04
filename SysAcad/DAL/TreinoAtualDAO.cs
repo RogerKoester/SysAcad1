@@ -30,5 +30,12 @@ namespace SysAcad.DAL
             }
 
         }
+
+        public static bool Excluir(TreinoAtual t)
+        {
+            ctx.TreinosAtuais.Remove(t);
+            ctx.SaveChanges();
+            return true;
+        }
     }
 }

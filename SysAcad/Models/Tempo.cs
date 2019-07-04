@@ -7,15 +7,14 @@ using System.Web;
 
 namespace SysAcad.Models
 {
-    [Table("ItensTreino")]
-    public class ItemTreino
+    [Table("Tempos")]
+    public class Tempo
     {
         [Key]
-        public int ItemTreinoId { get; set; }
+        public int TempoId { get; set; }
+        public double TempoDecorrido { get; set; }
         public Exercicio Exercicio { get; set; }
-        public int Repeticoes { get; set; }
-        public int Series { get; set; }
-        public double Horas { get; set; }
-        public double Minutos { get; set; }
+        public Usuario Aluno { get; set; }
+        public DateTime Data { get; set; }
     }
 }

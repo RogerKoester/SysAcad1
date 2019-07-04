@@ -58,10 +58,36 @@
                                     <h3>@itenTreino.Exercicio.Nome</h3>
                                         <ul class="list-group">
                                             <li class="list-group-item">
-                                                @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                                @{
+                                                    if (itenTreino.Horas != null)
+                                                    {
+                                                        @("Horas : " + itenTreino.Horas.ToString())
+                                                    }
+                                                }
                                             </li>
                                             <li class="list-group-item">
-                                                @("Séries : " + itenTreino.Series.ToString())
+                                                @{
+                                                    if (itenTreino.Minutos != null)
+                                                    {
+                                                        @("Minutos : " + itenTreino.Minutos.ToString())
+                                                    }
+                                                }
+                                            </li>
+                                            <li class="list-group-item">
+                                                @{
+                                                    if (itenTreino.Repeticoes != null)
+                                                    {
+                                                        @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                                    }
+                                                }
+                                            </li>
+                                            <li class="list-group-item">
+                                                @{
+                                                    if (itenTreino.Series != null)
+                                                    {
+                                                        @("Séries : " + itenTreino.Series.ToString())
+                                                    }
+                                                }
                                             </li>
                                         </ul>
                                 }
