@@ -17,6 +17,24 @@ namespace SysAcad.Controllers
         {
             return ExercicioDAO.RetornarExercicios();
         }
+        
+        [Route("Treino")]
+        public List<Treino> GetTreinos()
+        {
+            return TreinoDAO.RetornarTreinos();
+        }
+        [Route("TreinoPorUsuario/{id}")]
+        public dynamic GetTreinosPorUsuario(int id)
+        {
+            Usuario u = UsuarioDAO.BuscarUsuario(id);
+
+            List<Treino> GetTreino = TreinoDAO.RetornarTreinoPorUsuario(u);
+            if (u == null)
+            {
+                return NotFound();
+            }
+            return GetTreino;
+        }
 
         [Route("Usuario/{id}")]
         public dynamic GetUsuario(int id)
