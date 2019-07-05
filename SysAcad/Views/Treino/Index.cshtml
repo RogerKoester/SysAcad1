@@ -78,10 +78,12 @@
                                         <input type="checkbox" value="@e.ExercicioId" name="checkbox" id="@j" class="col-lg-2" style = "margin-top:10px" />
                                         @Html.Label(e.Nome, new { @class = "col-lg-2", @style = "margin-top:10px" })
                                         @Html.TextBox("repeticoes", "", new { placeholder = "Repetições", @class = "col-lg-2", @style = "margin-top:10px" })
-                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-lg-2", @style = "margin-top:10px" })
-                                        @Html.TextBox("horas", "", new { placeholder = "Horas", @class = "col-lg-1", @style = "margin-top:10px" })
-                                        @Html.TextBox("minutos", "", new { placeholder = "Minutos", @class = "col-lg-1 col-xs-offset-2", @style = "margin-top:10px" })
-                               
+                                        @Html.TextBox("series", "", new { placeholder = "Séries", @class = "col-lg-1", @style = "margin-top:10px" })
+                                        @Html.TextBox("horas", "", new { placeholder = "Horas", @class = "col-lg-2", @style = "margin-top:10px" })
+                                        @Html.TextBox("minutos", "", new { placeholder = "Minutos", @class = "col-lg-2", @style = "margin-top:10px;margin-bottom:10px" })
+                                        <div class="row">
+                                            <div class="col-lg-2"></div>
+                                        </div>
                                         j++;
                                     }
                                 }
@@ -173,12 +175,40 @@
 
                                         <ul class="list-group">
                                             <li class="list-group-item col-sm-5 col-sm-offset-1">
-                                                @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                                @{
+                                                    if (itenTreino.Horas != null)
+                                                    {
+                                                        @("Horas : " + itenTreino.Horas.ToString())
+                                                    }
+                                                }
+                                            </li>
+
+                                            <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                @{
+                                                    if (itenTreino.Minutos != null)
+                                                    {
+                                                        @("Minutos : " + itenTreino.Minutos.ToString())
+                                                    }
+                                                }
                                             </li>
                                             <li class="list-group-item col-sm-5 col-sm-offset-1">
-                                                @("Séries : " + itenTreino.Series.ToString())
+                                                @{
+                                                    if (itenTreino.Series != null)
+                                                    {
+                                                        @("Séries : " + itenTreino.Series.ToString())
+                                                    }
+                                                }
                                             </li>
-                                        </ul>                                    }
+                                            <li class="list-group-item col-sm-5 col-sm-offset-1">
+                                                @{
+                                                    if (itenTreino.Repeticoes != null)
+                                                    {
+                                                        @("Repetições : " + itenTreino.Repeticoes.ToString())
+                                                    }
+                                                }
+                                            </li>
+                                        </ul>                               
+                                        }
                                     i++;
                                 }
 

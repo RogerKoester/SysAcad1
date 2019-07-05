@@ -71,6 +71,12 @@ namespace SysAcad.Controllers
 
         public ActionResult Cadastro()
         {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+            }
             return View();
         }
 
@@ -92,7 +98,6 @@ namespace SysAcad.Controllers
             Periodo periodoPreferido = Periodo.calcularHorarioPreferido(u);
             if (UsuarioDAO.CadastrarUsuario(u))
             {
-                Session["USUARIO"] = u;
                 return RedirectToAction("Index", "Usuario");
             }
             else

@@ -29,7 +29,7 @@ namespace SysAcad.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Cadastrar(int? Usuarios, string txtDataDeExpiracao, string txtQuantidade, string txtNome, int[] checkbox, string[] repeticoes, string[] series)
+        public ActionResult Cadastrar(int? Usuarios, string txtDataDeExpiracao, string txtQuantidade, string txtNome, int[] checkbox, string[] repeticoes, string[] series, string[] horas, string[] minutos)
         {
             List<Exercicio> exercicios = new List<Exercicio>();
             foreach (int i in checkbox)
@@ -40,35 +40,30 @@ namespace SysAcad.Controllers
                     exercicios.Add(e);
                 }
             }
-            List<String> repeticoesDigitadas = new List<string>();
-            List<String> seriesDigitadas = new List<string>();
-
-            foreach (string s in repeticoes)
-            {
-                if (!s.Equals(""))
-                {
-                    repeticoesDigitadas.Add(s);
-                }
-            }
-
-            foreach (string s in series)
-            {
-                if (!s.Equals(""))
-                {
-                    seriesDigitadas.Add(s);
-                }
-            }
 
             List<ItemTreino> itensTreino = new List<ItemTreino>();
 
             for (int i = 0; i < exercicios.Count; i++)
             {
-                ItemTreino item = new ItemTreino
+                ItemTreino item = new ItemTreino();
+                item.Exercicio = exercicios[i];
+                if (!repeticoes[i].Equals(""))
                 {
-                    Exercicio = exercicios[i],
-                    Repeticoes = Convert.ToInt16(repeticoesDigitadas[i]),
-                    Series = Convert.ToInt16(seriesDigitadas[i])
-                };
+                    item.Repeticoes = Convert.ToInt16(repeticoes[i]);
+                }
+                if (!minutos[i].Equals(""))
+                {
+                    item.Minutos = Convert.ToDouble(minutos[i]);
+                }
+                if (!horas[i].Equals(""))
+                {
+                    item.Horas = Convert.ToDouble(horas[i]);
+                }
+                if (!series[i].Equals(""))
+                {
+                    item.Series = Convert.ToInt16(series[i]);
+                }
+
                 itensTreino.Add(item);
             }
 
@@ -111,6 +106,23 @@ namespace SysAcad.Controllers
             }
 
             Usuario u = (Usuario)Session["USUARIO"];
+            if (u.IsAdmin)
+            {
+                return View(TreinoDAO.RetornarTreinos());
+            }
+            return View(TreinoDAO.RetornarTreinoPorUsuario(u));
+        }
+
+        public ActionResult HistoricoTreino()
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+            }
+
+            Usuario u = (Usuario)Session["USUARIO"];
 
             return View(TreinoDAO.RetornarTreinoPorUsuario(u));
         }
@@ -135,6 +147,73 @@ namespace SysAcad.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Proximo(string txtMedida,int hdnId,string unidades)
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+                TreinoAtual t = TreinoAtualDAO.BuscarTreinoAtualUsuario(user);
+                Treino treino = t.Treino;
+                TentativaDeTreino tentativaAtual = TentativaDeTreinoDAO.BuscarTentativaDeTreino(treino.TentativasDeTreino.Last().TentativaDeTreinoId);
+                if (!(hdnId + 1 > treino.ItensTreino.Count))
+                {
+                    tentativaAtual.ItemTreinoAtual = treino.ItensTreino[hdnId + 1];
+                }
+                else
+                {
+                    RedirectToAction("TreinoAtual");
+                }
+                
+                TentativaDeTreinoDAO.Alterar(tentativaAtual);
+                if (unidades.Equals("peso"))
+                {
+                    Peso peso = new Peso();
+                    peso.Exercicio = tentativaAtual.ItemTreinoAtual.Exercicio;
+                    peso.Data = DateTime.Now;
+                    peso.Aluno = user;
+                    peso.Quantidade = Convert.ToDouble(txtMedida);
+                    PesoDAO.Cadastrar(peso);
+                }
+                else if (!(txtMedida.Equals("")))
+                {
+                    Tempo tempo = new Tempo();
+                    tempo.Exercicio = tentativaAtual.ItemTreinoAtual.Exercicio;
+                    tempo.Data = DateTime.Now;
+                    tempo.Aluno = user;
+                    tempo.TempoDecorrido = Convert.ToDouble(txtMedida);
+                    TempoDAO.Cadastrar(tempo);
+                }
+                if (t != null)
+                {
+                    ViewBag.TreinoAtual = TreinoDAO.BuscarTreino(t.Treino.TreinoId);
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+            }
+
+            return RedirectToAction("TreinoAtual");
+        }
+
+        public ActionResult Finalizar()
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+                TreinoAtual t = TreinoAtualDAO.BuscarTreinoAtualUsuario(user);
+                Treino treino = TreinoDAO.BuscarTreino(t.Treino.TreinoId);
+                treino.TentativasDeTreino.Last().Termino = DateTime.Now;
+                TreinoDAO.Alterar(treino);
+                TreinoAtualDAO.Excluir(t);
+            }
+            return RedirectToAction("ListaTreino");
         }
 
         public ActionResult IniciarTreino(int? id)

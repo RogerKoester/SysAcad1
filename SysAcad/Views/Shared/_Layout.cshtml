@@ -22,10 +22,11 @@
                 <ul class="nav navbar-nav">
                     @Html.ActionLink("Treino atual", "TreinoAtual", "Treino", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Treinos", "ListaTreino", "Treino", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Histórico", "HistoricoTreino", "Treino", new { area = "" }, new { @class = "navbar-brand" })
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
-                    <li>@ViewBag.Usuario.Nome</li>
+                    <li class="text-center">@ViewBag.Usuario.Nome</li>
                 </ul>
             </div>
         </div>

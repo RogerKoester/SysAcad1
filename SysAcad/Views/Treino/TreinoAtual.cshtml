@@ -10,109 +10,127 @@
     int index = t.ItensTreino.FindIndex(item => item == tentativaAtual.ItemTreinoAtual);
     string rowColor = "";
 }
-
-<h2>@t.Nome</h2>
-
 <div>
-    @{
-        if (tentativaAtual.ItemTreinoAtual.Exercicio != null && !tentativaAtual.ItemTreinoAtual.Exercicio.Nome.IsEmpty())
-        {
-            <h3>@tentativaAtual.ItemTreinoAtual.Exercicio.Nome</h3>
-        }
-        else
-        {
-            <h3>Sem Exercicio Atual</h3>
-        }
-    }
+    <h2>@t.Nome</h2>
+    @using (Html.BeginForm("Proximo", "Treino", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 
-    @Html.TextBox("txtMedida", "", null, null)
-    <select name="Unidades">
-        <option value="valor1">Kg</option>
-        <option value="valor2" selected>Minutos</option>
-    </select>
-
-</div>
-<table class="table table-striped">
-    <tr>
-        <th></th>
-        <th>Nome</th>
-        <th>Link</th>
-        <th>Séries</th>
-        <th>Repetições</th>
-
-    </tr>
-    @foreach (ItemTreino itemTreino in t.ItensTreino)
     {
-        bool atual = false;
-        int indexAtual = t.ItensTreino.FindIndex(item => item == itemTreino);
-        if (indexAtual == index)
-        {
-            rowColor = "#21a6ff";
-            atual = true;
-        }
-        else
-        {
-            rowColor = "#bdbfc9";
-            atual = false;
-        }
 
-        <tr bgcolor="@rowColor">
-            @if (itemTreino.Exercicio.Imagens != null && itemTreino.Exercicio.Imagens.Count > 0)
+        <div class="form-group row">
+            @{
+                if (tentativaAtual.ItemTreinoAtual.Exercicio != null && !tentativaAtual.ItemTreinoAtual.Exercicio.Nome.IsEmpty())
+                {
+                    string color = "#21a6ff";
+                    <div class="col-lg-offset-1">
+                        @Html.Hidden("hdnId", index)
+                        <h3 style="color:@color">Exercício atual : @tentativaAtual.ItemTreinoAtual.Exercicio.Nome</h3>
+                        @Html.TextBox("txtMedida", "", null, new { @class = "col-lg-2" })
+                        <select name="Unidades" class="col-lg-2 col-sm-offset-1 btn btn-warning" id="unidades">
+                            <option value="peso">Kg</option>
+                            <option value="minutos" selected>Minutos</option>
+                        </select>
+                        <input type="submit" value="Próximo exercício" class="btn btn-default col-lg-2 col-lg-offset-2" />
+                        @Html.ActionLink("Finalizar Treino", "Finalizar", "Treino", new { @class = "btn btn-danger col-lg-2 col-lg-offset-1" })
+                    </div>
+
+                }
+                else
+                {
+                    <h3>Sem Exercicio Atual</h3>
+                }
+            }
+        </div>
+                }
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Link</th>
+            <th>Séries</th>
+            <th>Repetições</th>
+            <th>Horas</th>
+            <th>Minutos</th>
+
+        </tr>
+        @foreach (ItemTreino itemTreino in t.ItensTreino)
+        {
+            bool atual = false;
+            int indexAtual = t.ItensTreino.FindIndex(item => item == itemTreino);
+            if (indexAtual == index)
             {
-                <td>
-                    <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
-                         style="width:100px" />
-                </td>
+                rowColor = "#21a6ff";
+                atual = true;
             }
             else
             {
-                <td>
-                    Sem imagem
-                </td>
+                rowColor = "#bdbfc9";
+                atual = false;
             }
-            @{
-                if (atual)
+
+            <tr bgcolor="@rowColor">
+                @if (itemTreino.Exercicio.Imagens[0] != null)
                 {
-                    <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Exercicio.Nome</td>
+                    <td>
+                        <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
+                             style="width:100px" />
+                    </td>
                 }
                 else
                 {
-                    <td>@itemTreino.Exercicio.Nome</td>
+                    <td>
+                        Sem imagem
+                    </td>
                 }
-            }
-            <td>
                 @{
                     if (atual)
                     {
-                        <a href="@itemTreino.Exercicio.Link" style="font-size:25px; color:black;">
-                            <div style="height:100%;width:100%;text-decoration:underline">
-                                @itemTreino.Exercicio.Link
-                            </div>
-                        </a>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Exercicio.Nome</td>
                     }
                     else
                     {
-                        <a href="@itemTreino.Exercicio.Link">
-                            <div style="height:100%;width:100%;text-decoration:underline">
-                                @itemTreino.Exercicio.Link
-                            </div>
-                        </a>
+                        <td>@itemTreino.Exercicio.Nome</td>
+                    }
+                }
+                <td>
+                    @{
+                        if (atual)
+                        {
+                            <a href="@itemTreino.Exercicio.Link" style="font-size:25px; color:black;">
+                                <div style="height:100%;width:100%;text-decoration:underline">
+                                    @itemTreino.Exercicio.Link
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@itemTreino.Exercicio.Link">
+                                <div style="height:100%;width:100%;text-decoration:underline">
+                                    @itemTreino.Exercicio.Link
+                                </div>
+                            </a>
+                        }
+                    }
+
+                </td>
+                @{
+                    if (atual)
+                    {
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Series</td>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Repeticoes</td>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Horas</td>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Minutos</td>
+                    }
+                    else
+                    {
+                        <td>@itemTreino.Series</td>
+                        <td>@itemTreino.Repeticoes</td>
+                        <td>@itemTreino.Horas</td>
+                        <td>@itemTreino.Minutos</td>
                     }
                 }
 
-            </td>
-            @{
-                if (atual)
-                {
-                    <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Series</td>
-                    <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Repeticoes</td>
-                }
-                else
-                {
-                    <td>@itemTreino.Series</td>
-                    <td>@itemTreino.Repeticoes</td>
-                }
-            }
+            </tr>
+                    }
 
-        </tr>
-    }
+</div>

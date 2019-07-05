@@ -13,12 +13,12 @@ namespace SysAcad.DAL
 
         public static Treino BuscarTreino(int? e)
         {
-            return ctx.Treinos.Include("Usuario").Include("ItensTreino.Exercicio").Include("TentativasDeTreino.ItemTreinoAtual").FirstOrDefault(x => x.TreinoId == e);
+            return ctx.Treinos.Include("Usuario").Include("ItensTreino.Exercicio.Imagens").Include("TentativasDeTreino.ItemTreinoAtual").FirstOrDefault(x => x.TreinoId == e);
         }
 
         public static List<Treino> RetornarTreinoPorUsuario(Usuario u)
         {
-            return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TentativasDeTreino.ItemTreinoAtual").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
+            return ctx.Treinos.Include("ItensTreino.Exercicio.Imagens").Include("TentativasDeTreino.ItemTreinoAtual").Where(x => x.Usuario.UsuarioId.Equals(u.UsuarioId)).ToList();
         }
 
         public static List<Treino> RetornarTreinos()
