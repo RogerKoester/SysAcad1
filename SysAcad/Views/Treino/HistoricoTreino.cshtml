@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SysAcad.Models.Treino>
+@{
+    ViewBag.Title = "Historico de Treino";
+    int i = 0;
+}
+
+<h2>Historico de Treino</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome do treino
+        </th>
+        <th>
+            Tentativas
+        </th>
+    </tr>
+    <tr></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <h4>@(item.Nome)</h4>
+            </td>
+            <td>
+                <div class="panel-group" id="accordion_@i">
+                    <div class="panel panel-default" id="panel_@i">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapseOne_@i" href="#collapseOne_@i">
+                                    Tentativas
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne_@i" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                @foreach (var tentativa in item.TentativasDeTreino)
+                                {
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item">
+                                            @{
+                                                if (tentativa.Inicio != null)
+                                                {
+                                                    @("Início : " + tentativa.Inicio.ToString())
+                                                }
+                                            }
+                                        </li>
+                                        <li class="list-group-item">
+                                            @{
+                                                if (tentativa.Termino != null)
+                                                {
+                                                    if (tentativa.Termino == tentativa.Inicio)
+                                                    {
+                                                        @("Término : Treino em andamento")
+                                                    }
+                                                    else
+                                                    {
+                                                        @("Término : " + tentativa.Termino.ToString())
+                                                    }
+
+                                                }
+                                            }
+                                        </li>
+                                        @foreach(var itemtreino in item.ItensTreino)
+                                        {
+                                            <li class="list-group-item">
+                                                @(itemtreino.Exercicio.Nome)
+                                            </li>
+                                        }
+                                    </ul>
+                                 }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+        i++;
+      }
+
+</table>

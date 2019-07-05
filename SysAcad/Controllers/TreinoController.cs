@@ -93,6 +93,23 @@ namespace SysAcad.Controllers
             }
 
             Usuario u = (Usuario)Session["USUARIO"];
+            if (u.IsAdmin)
+            {
+                return View(TreinoDAO.RetornarTreinos());
+            }
+            return View(TreinoDAO.RetornarTreinoPorUsuario(u));
+        }
+
+        public ActionResult HistoricoTreino()
+        {
+            if (Session["USUARIO"] != null)
+            {
+                Usuario user = (Usuario)Session["USUARIO"];
+                ViewBag.IsAdmin = user.IsAdmin;
+                ViewBag.Usuario = user;
+            }
+
+            Usuario u = (Usuario)Session["USUARIO"];
 
             return View(TreinoDAO.RetornarTreinoPorUsuario(u));
         }
