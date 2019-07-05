@@ -49,6 +49,8 @@
             <th>Link</th>
             <th>Séries</th>
             <th>Repetições</th>
+            <th>Horas</th>
+            <th>Minutos</th>
 
         </tr>
         @foreach (ItemTreino itemTreino in t.ItensTreino)
@@ -67,7 +69,7 @@
             }
 
             <tr bgcolor="@rowColor">
-                @if (itemTreino.Exercicio.Imagens != null && itemTreino.Exercicio.Imagens.Count > 0)
+                @if (itemTreino.Exercicio.Imagens[0] != null)
                 {
                     <td>
                         <img src="@itemTreino.Exercicio.Imagens[0].Caminho"
@@ -116,11 +118,15 @@
                     {
                         <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Series</td>
                         <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Repeticoes</td>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Horas</td>
+                        <td class="text-danger" style="font-size:25px;color:white;">@itemTreino.Minutos</td>
                     }
                     else
                     {
                         <td>@itemTreino.Series</td>
                         <td>@itemTreino.Repeticoes</td>
+                        <td>@itemTreino.Horas</td>
+                        <td>@itemTreino.Minutos</td>
                     }
                 }
 

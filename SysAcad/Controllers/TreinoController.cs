@@ -129,9 +129,17 @@ namespace SysAcad.Controllers
                 TreinoAtual t = TreinoAtualDAO.BuscarTreinoAtualUsuario(user);
                 Treino treino = t.Treino;
                 TentativaDeTreino tentativaAtual = TentativaDeTreinoDAO.BuscarTentativaDeTreino(treino.TentativasDeTreino.Last().TentativaDeTreinoId);
-                tentativaAtual.ItemTreinoAtual = treino.ItensTreino[hdnId + 1];
+                if (!(hdnId + 1 > treino.ItensTreino.Count))
+                {
+                    tentativaAtual.ItemTreinoAtual = treino.ItensTreino[hdnId + 1];
+                }
+                else
+                {
+                    RedirectToAction("TreinoAtual");
+                }
+                
                 TentativaDeTreinoDAO.Alterar(tentativaAtual);
-                if (txtMedida.Equals("peso"))
+                if (unidades.Equals("peso"))
                 {
                     Peso peso = new Peso();
                     peso.Exercicio = tentativaAtual.ItemTreinoAtual.Exercicio;
@@ -140,7 +148,7 @@ namespace SysAcad.Controllers
                     peso.Quantidade = Convert.ToDouble(txtMedida);
                     PesoDAO.Cadastrar(peso);
                 }
-                else
+                else if (!(txtMedida.Equals("")))
                 {
                     Tempo tempo = new Tempo();
                     tempo.Exercicio = tentativaAtual.ItemTreinoAtual.Exercicio;
