@@ -22,7 +22,9 @@
         </th>
         <th>
             <h4>Treinos realizados</h4>
+          
         </th>
+        
 
     </tr>
     <tr></tr>
@@ -73,6 +75,13 @@
             <td>
                 @Html.ActionLink("Iniciar treino", "IniciarTreino", "Treino", new { id = item.TreinoId },new {@class = "btn btn-danger" })
                 </td>
+            <td>
+                @if (ViewBag.IsAdmin)
+                {
+                    @Html.ActionLink("Remover", "Remover", "Treino", new { id = item.TreinoId }, new { @class = "btn btn-warning" })
+                }
+               
+            </td>
             </tr>
         i++;
     }

@@ -25,6 +25,15 @@ namespace SysAcad.DAL
         {
             return ctx.Treinos.Include("ItensTreino.Exercicio").Include("TentativasDeTreino.ItemTreinoAtual").ToList();
         }
+        public static bool RemoverTreino(int? id)
+        {
+
+            Treino treino = ctx.Treinos.Find(id);
+            ctx.Treinos.Remove(treino);
+            ctx.SaveChanges();
+
+            return true;
+        }
 
         public static Treino BuscarTreinoPorNome(Treino t)
         {

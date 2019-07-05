@@ -88,6 +88,19 @@ namespace SysAcad.Controllers
             return RedirectToAction("Error");
         }
 
+        public ActionResult Remover(int? id)
+        {
+            if (id == null)
+            {
+
+            }
+            else
+            {
+                TreinoDAO.RemoverTreino(id);
+            }
+
+            return RedirectToAction("Index", "Usuario");
+        }
         public ActionResult ListaTreino()
         {
             if (Session["USUARIO"] != null)
